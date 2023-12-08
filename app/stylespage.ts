@@ -132,7 +132,7 @@ h1 {
 
 nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -140,25 +140,30 @@ nav {
 
 .nav-links{
   display: flex;
-  justify-content: center;
-  width: 40%;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-self: center;
   align-items: center;
+  align-content: center;
   background: #fff; 
   padding: 20px 15px;
-  border-radius: 12px;
+  border-radius: 4px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  margin-top: 3%;
   margin-bottom: 3%;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 .link {
-  width: 100%;
-  justify-content: center;
+  width: 20%;
+  justify-content: left;
   display: flex;
+  margin-left: 100px;
   flex-direction: row;
   margin-bottom: 10px;
+  letter-spacing: 5px;
+  gap: 15px;
 }
 
 .nav-links:hover {
@@ -167,6 +172,7 @@ nav {
 
 .nav-links li{
   display: flex;
+  flex-direction: row;
   list-style: none;
   margin: 0 12px;
 }
@@ -220,9 +226,11 @@ nav {
 .logo {
   display: flex;
   max-height: 150px;
-  width: 100%;
+  width: 30%;
+  margin-left: 100px;
   height: auto;
-  justify-content: center;
+  justify-content: left;
+  align-content: center;
   align-items: center;
 }
 
@@ -251,6 +259,7 @@ input {
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 20px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Adiciona transição para a borda e a sombra */
 }
 
 .newfunctionalities label {
@@ -303,7 +312,7 @@ input {
 .custom-checkbox {
   width: 20px;
   height: 20px;
-  border: 2px solid #4caf50;
+  border: 2px solid #fd0018;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -315,7 +324,7 @@ input {
   width: 12px;
   height: 12px;
   border-radius: 2px;
-  background-color: #4caf50; /* Cor do "check" quando marcado */
+  background-color: #fd0018; /* Cor do "check" quando marcado */
   display: none;
 }
 
@@ -324,6 +333,8 @@ input {
 }
 
 .checkbox-input:checked + .custom-checkbox {
-  background-color: #4caf50; /* Cor de fundo quando marcado */
+  background-color: #fd0018; /* Cor de fundo quando marcado */
+  transition: background-color 0.2s ease-in-out; /* Adiciona transição para a cor de fundo */
+
 }
 `

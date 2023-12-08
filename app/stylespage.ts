@@ -1,0 +1,329 @@
+import styled from 'styled-components';
+import theme from './theme';
+
+
+export const Container = styled.div`
+
+`;
+
+export const CardContent = styled.div`
+.principalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30%;
+  background: ${theme.colors.background};  
+}
+
+.Cardsalign {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.campaign-card {
+  margin: 10px;
+  padding: 20px;
+  width: 20%; /* 48% para deixar um espaço mínimo entre as duas divs */
+  margin-bottom: 20px;
+  gap: 20px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.1); 
+  justify-content: center;
+  align-items: center;
+   /*  border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5); */
+}
+
+.base-container {
+  font-size: 20px;
+	color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+h3 { 
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+p {
+  color: white;
+}
+
+.campaign-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: 0 0 8px #fd0018, 0 0 35px #fd0018, 0 0 60px #fd0018;
+}
+
+.campaign-card.clicked {
+  background: rgba(255, 255, 255, 0.1); 
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Estilo dos detalhes de campanha expandidos */
+.campaign-percentages {
+  display: none;
+}
+
+.campaign-card.clicked .campaign-percentages {
+  display: block;
+  margin-top: 10px;
+}
+
+.percentage-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Esconde o conteúdo que transborda */
+  text-overflow: ellipsis; /* Mostra "..." para indicar que o texto foi cortado */
+  white-space: nowrap; 
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+h1 {
+  margin-bottom: 3%;
+}
+
+.percentage-item h3 {
+  margin: 10px;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.com-aviso {
+  border: 2px solid red;
+  box-shadow: 0 0 1px #fd0018, 0 0 15px #fd0018, 0 0 30px #fd0018;
+}
+
+.com-aviso-item {
+  border: 2px solid red;
+}
+
+/* Estilos para porcentagens */
+.porcentagem-vermelha {
+  color: red;
+  font-weight: bold;
+}
+
+.porcentagem-verde {
+  color: green;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  align-items: center;
+  background: #fff; 
+  padding: 20px 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  margin-top: 3%;
+  margin-bottom: 3%;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.link {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.nav-links:hover {
+  box-shadow: 0 0 8px #fd0018, 0 0 35px #fd0018, 0 0 60px #fd0018;
+}
+
+.nav-links li{
+  display: flex;
+  list-style: none;
+  margin: 0 12px;
+}
+.nav-links li a{
+  position: relative;
+  color: black;
+  font-size: 25px;
+  font-family:'open_sansregular';  
+  font-weight: bold;
+  padding: 6px 0;
+  text-decoration: none;
+}
+.nav-links li a:before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: red;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+.nav-links li a:hover:before{
+  width: 100%;
+}
+.nav-links li.center a:before{
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-links li.upward a:before{
+  width: 100%;
+  bottom: -5px;
+  opacity: 0;
+}
+.nav-links li.upward a:hover:before{
+  bottom: 0px;
+  opacity: 1;
+}
+.nav-links li.forward a:before{
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+.nav-links li.forward a:hover:before{
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.logo {
+  display: flex;
+  max-height: 150px;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  color: black;
+  padding: 15px 25px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.newfunctionalities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.newfunctionalities input {
+  margin-right: 10px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.newfunctionalities label {
+  color: black;
+      margin-right: 1px;
+      cursor: pointer;
+      margin-right: 20px;
+      letter-spacing: 2px;
+      font-weight: 500;
+
+      &:checked {
+        color: #007bff;
+      }
+}
+
+.newfunctionalities button {
+ padding: 10px 15px;
+ background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #007bff;
+    border: 2px solid red;
+
+  }
+}
+
+.letter-checkboxes {
+   display: flex;
+   flex-direction: row;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  margin-right: 10px;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4caf50;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.checkmark {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background-color: #4caf50; /* Cor do "check" quando marcado */
+  display: none;
+}
+
+.custom-checkbox.checked .checkmark {
+  display: block;
+}
+
+.checkbox-input:checked + .custom-checkbox {
+  background-color: #4caf50; /* Cor de fundo quando marcado */
+}
+`

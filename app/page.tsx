@@ -162,7 +162,7 @@ const Home: React.FC = () => {
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
               />
-            <button onClick={applyNameFilter}>Aplicar Filtro</button>
+            <button onClick={applyNameFilter} className="btn-slice">Aplicar Filtro</button>
               </div>
 
             {/* Checkbox group for filtering by initial letter */}

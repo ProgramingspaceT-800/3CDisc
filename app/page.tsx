@@ -26,6 +26,7 @@ const Home: React.FC = () => {
   const [initialLetterFilter, setInitialLetterFilter] = useState<string[]>([]); // State to store the initial letter filter
   const [alertedBases, setAlertedBases] = useState<string[]>([]);
   const [letterFilters, setLetterFilters] = useState<string[]>([]);
+  const [cardLayout, setCardLayout] = useState<'default' | 'alternate' | 'compact' | 'minimalist'>('default'); // Adiciona mais opções de layout
 
   // Função para aplicar o filtro de nome
   const applyNameFilter = () => {
@@ -49,6 +50,23 @@ const Home: React.FC = () => {
       setLetterFilters([...letterFilters, selectedLetter]);
     }
   };
+
+  const toggleCardLayout = () => {
+    setCardLayout((prevLayout) => {
+      switch (prevLayout) {
+        case 'default':
+          return 'alternate';
+        case 'alternate':
+          return 'compact';
+        case 'compact':
+          return 'minimalist'; // Alteração para suportar o layout "minimalista"
+        case 'minimalist':
+          return 'default'; // Adicione esta linha para alternar de "minimalista" para "default"
+        default:
+          return 'default';
+      }
+    });
+  }
 
   useEffect(() => {
     async function fetchBaseData() {
@@ -163,7 +181,7 @@ const Home: React.FC = () => {
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
               />
-            <button onClick={applyNameFilter} className="btn-slice">Aplicar Filtro</button>
+            <button onClick={toggleCardLayout} className="btn-slice">Mudar Layout</button>
               </div>
 
             {/* Checkbox group for filtering by initial letter */}
@@ -191,8 +209,8 @@ const Home: React.FC = () => {
         </nav>
         {loading && <p>Carregando...</p>}
         {!loading && (
-          <div className="Cardsalign">
-            {Object.keys(bases).map((baseName) => {
+          <div className={`Cardsalign${cardLayout === 'compact' ? ' compact-layout' : ''}${cardLayout === 'alternate' ? ' alternate-layout' : ''}${cardLayout === 'minimalist' ? ' minimalist-layout' : ''}`}>
+          {Object.keys(bases).map((baseName) => {
               // Check if the base meets the filters
               if (
                 baseName.toLowerCase().includes(nameFilter.toLowerCase()) &&

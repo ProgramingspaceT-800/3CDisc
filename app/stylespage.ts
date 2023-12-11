@@ -23,9 +23,61 @@ export const CardContent = styled.div`
 }
 
 .campaign-card {
+  text-align: center;
   margin: 10px;
   padding: 20px;
   width: 20%; /* 48% para deixar um espaço mínimo entre as duas divs */
+  margin-bottom: 20px;
+  gap: 20px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.1); 
+  justify-content: center;
+  align-items: center;
+   /*  border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5); */
+}
+
+.alternate-layout .campaign-card {
+  text-align: center;
+  margin: 10px;
+  padding: 20px;
+  width: 10%; /* 48% para deixar um espaço mínimo entre as duas divs */
+  margin-bottom: 20px;
+  gap: 20px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.1); 
+  justify-content: center;
+  align-items: center;
+   /*  border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5); */
+}
+
+.compact-layout .campaign-card {
+  text-align: center;
+  margin: 10px;
+  padding: 50px;
+  width: 48%; /* 48% para deixar um espaço mínimo entre as duas divs */
+  margin-bottom: 20px;
+  gap: 20px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.1); 
+  justify-content: center;
+  align-items: center;
+   /*  border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5); */
+}
+
+.minimalist-layout .campaign-card {
+  text-align: center;
+  margin: 10px;
+  padding: 50px;
+  width: 50%; /* 48% para deixar um espaço mínimo entre as duas divs */
   margin-bottom: 20px;
   gap: 20px;
   border-radius: 5px;
@@ -286,14 +338,15 @@ input {
 
 .newfunctionalities button {
   color: white;
-	background: red;
+  background: linear-gradient(to right, #ff0000, #b91010);
+  border-radius: 4px;
 }
 
 .newfunctionalities button:hover
 {
 	color: white;
-	background: red;
-	transition-delay: 1s;
+  background: linear-gradient(to right, #ff0000, #ff0f0f);
+	transition-delay: 0.1s;
 }
 
 .letter-checkboxes {

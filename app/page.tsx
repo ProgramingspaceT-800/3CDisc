@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CardContent, Container } from './stylespage';
+import AlertSound from './components/alert/alertSound';
 
 const Home: React.FC = () => {
   type BasesType = {
@@ -67,6 +68,29 @@ const Home: React.FC = () => {
       }
     });
   }
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, baseId: string) => {
+    const file = event.target.files && event.target.files[0];
+
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await axios.post(`https://your-api-endpoint/upload/${baseId}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log(`File uploaded successfully for base ${baseId}:`, response.data);
+        // You can add additional logic or update the state based on the upload response
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        // Handle error accordingly
+      }
+    }
+  };
 
   useEffect(() => {
     async function fetchBaseData() {
@@ -157,99 +181,102 @@ const Home: React.FC = () => {
 
   return (
     <>
-    <CardContent>
-      <div className="principalContent">
-        <nav>
-          <ul className="nav-links">
-        <div className="logo">
-          <img src="/logo (1).png" alt="PH Negócios Plataforma" style={{ width: '100px', height: 'auto', marginTop: '5%', marginBottom: '3%' }} />
-            <div className='link'>
-            <li><a href="/">Bases</a></li>
-            <li className="center"><a href="#">Graficos</a></li>
-            <li className="upward"><a href="#">Adicionar</a></li>
-            <li className="forward"><a href="#">Update</a></li>
-            </div>
-        </div>
-
-  <div className='filters'>
-        <div className='newfunctionalities'>
-          <div>
-
-            <input
-              type="text"
-              placeholder="Filtrar por nome"
-              value={nameFilter}
-              onChange={(e) => setNameFilter(e.target.value)}
-              />
-            <button onClick={toggleCardLayout} className="btn-slice">Mudar Layout</button>
+      <CardContent>
+        <AlertSound />
+        <div className="principalContent">
+          <nav>
+            <ul className="nav-links">
+              <div className="logo">
+                <img src="/logo (1).png" alt="PH Negócios Plataforma" style={{ width: '100px', height: 'auto', marginTop: '5%', marginBottom: '3%' }} />
+                <div className='link'>
+                  <li><a href="/">Bases</a></li>
+                  <li className="center"><a href="#">Graficos</a></li>
+                  <li className="upward"><a href="#">Adicionar</a></li>
+                  <li className="forward"><a href="#">Update</a></li>
+                </div>
               </div>
 
-            {/* Checkbox group for filtering by initial letter */}
-            <div className="letter-checkboxes">
-      {['S', 'E', 'R', 'G', 'B', 'I', 'C', 'M'].map((letter) => (
-        <label key={letter} className="letter-checkbox">
-          <input
-            type="checkbox"
-            value={letter}
-            checked={letterFilters.includes(letter)}
-            onChange={() => handleLetterFilterChange(letter)}
-            className="checkbox-input"
-            />
-          <span className="custom-checkbox">
-            <span className="checkmark">&#10003;</span>
-          </span>
-          {letter}
-        </label>
-              ))}
-{/*               <button onClick={applyInitialLetterFilter}>Aplicar Filtro</button>
- */}            </div>
-          </div>
-              </div>
-          </ul>
-        </nav>
-        {loading && <p>Carregando...</p>}
-        {!loading && (
-          <div className={`Cardsalign${cardLayout === 'compact' ? ' compact-layout' : ''}${cardLayout === 'alternate' ? ' alternate-layout' : ''}${cardLayout === 'minimalist' ? ' minimalist-layout' : ''}`}>
-          {Object.keys(bases).map((baseName) => {
-              // Check if the base meets the filters
-              if (
-                baseName.toLowerCase().includes(nameFilter.toLowerCase()) &&
-                (letterFilters.length === 0 || letterFilters.some((letter) => baseName.startsWith(letter)))
-              ) {
-                return (
-                  <div
-                    key={baseName}
-                    className={`campaign-card${expandedBase === bases[baseName] ? ' clicked' : ''}`}
-                    onClick={() => toggleDetails(bases[baseName])}
-                  >
-                    <div className={`base ${baseData[bases[baseName]] && baseData[bases[baseName]].length > 0 && parseFloat(baseData[bases[baseName]][0]?.completed_percentage) >= 90 ? 'com-aviso' : ''}`}>{baseName}</div>
-                    {expandedBase === bases[baseName] && (
-                      <div className="campaign-percentages">
-                        {baseData[bases[baseName]]?.map((post) => (
-                          <Container key={post.id}>
-                            <div
-                              className={`percentage-item ${parseFloat(post.completed_percentage) >= 90 ? 'com-aviso' : ''}`}
-                            >
-                              <h3>{post.name}</h3>
-                              <p>{post.created_at}</p>
-                              <h3 className={`porcentagem-${post.completed_percentage === '100.00' ? 'verde' : 'vermelha'}`}>
-                                {renderPorcentagem(post.completed_percentage)}
-                              </h3>
-                              <p>Última atualização: {lastUpdate.toLocaleTimeString()}</p>
-                            </div>
-                          </Container>
-                        ))}
-                      </div>
-                    )}
+              <div className='filters'>
+                <div className='newfunctionalities'>
+                  <div>
+
+                    <input
+                      type="text"
+                      placeholder="Filtrar por nome"
+                      value={nameFilter}
+                      onChange={(e) => setNameFilter(e.target.value)}
+                    />
+                    <button onClick={toggleCardLayout} className="btn-slice">Mudar Layout</button>
                   </div>
-                );
-              }
-              return null;
-            })}
-          </div>
-        )}
-      </div>
-    </CardContent>
+
+                  {/* Checkbox group for filtering by initial letter */}
+                  <div className="letter-checkboxes">
+                    {['S', 'E', 'R', 'G', 'B', 'I', 'C', 'M'].map((letter) => (
+                      <label key={letter} className="letter-checkbox">
+                        <input
+                          type="checkbox"
+                          value={letter}
+                          checked={letterFilters.includes(letter)}
+                          onChange={() => handleLetterFilterChange(letter)}
+                          className="checkbox-input"
+                        />
+                        <span className="custom-checkbox">
+                          <span className="checkmark">&#10003;</span>
+                        </span>
+                        {letter}
+                      </label>
+                    ))}
+                    {/*               <button onClick={applyInitialLetterFilter}>Aplicar Filtro</button>
+ */}            </div>
+                </div>
+              </div>
+            </ul>
+          </nav>
+          {loading && <p>Carregando...</p>}
+          {!loading && (
+            <div className={`Cardsalign${cardLayout === 'compact' ? ' compact-layout' : ''}${cardLayout === 'alternate' ? ' alternate-layout' : ''}${cardLayout === 'minimalist' ? ' minimalist-layout' : ''}`}>
+              {Object.keys(bases).map((baseName) => {
+                // Check if the base meets the filters
+                if (
+                  baseName.toLowerCase().includes(nameFilter.toLowerCase()) &&
+                  (letterFilters.length === 0 || letterFilters.some((letter) => baseName.startsWith(letter)))
+                ) {
+                  return (
+                    <div
+                      key={baseName}
+                      className={`campaign-card${expandedBase === bases[baseName] ? ' clicked' : ''}`}
+                      onClick={() => toggleDetails(bases[baseName])}
+                    >
+                      <div className={`base ${baseData[bases[baseName]] && baseData[bases[baseName]].length > 0 && parseFloat(baseData[bases[baseName]][0]?.completed_percentage) >= 90 ? 'com-aviso' : ''}`}>{baseName}</div>
+{/*                       <input type="file" onChange={(e) => handleFileUpload(e, bases[baseName])} />
+ */}
+                      {expandedBase === bases[baseName] && (
+                        <div className="campaign-percentages">
+                          {baseData[bases[baseName]]?.map((post) => (
+                            <Container key={post.id}>
+                              <div
+                                className={`percentage-item ${parseFloat(post.completed_percentage) >= 90 ? 'com-aviso' : ''}`}
+                              >
+                                <h3>{post.name}</h3>
+                                <p>{post.created_at}</p>
+                                <h3 className={`porcentagem-${post.completed_percentage === '100.00' ? 'verde' : 'vermelha'}`}>
+                                  {renderPorcentagem(post.completed_percentage)}
+                                </h3>
+                                <p>Última atualização: {lastUpdate.toLocaleTimeString()}</p>
+                              </div>
+                            </Container>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+          )}
+        </div>
+      </CardContent>
     </>
   );
 };

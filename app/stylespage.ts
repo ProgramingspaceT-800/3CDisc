@@ -130,6 +130,11 @@ h1 {
   font-weight: bold;
 }
 
+porcentagem-azul {
+  color: blue;
+  font-weight: bold;
+}
+
 nav {
   display: flex;
   flex-direction: row;
@@ -260,6 +265,10 @@ input {
   font-size: 14px;
   margin-bottom: 20px;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Adiciona transição para a borda e a sombra */
+}
+
+.newfunctionalities input:focus {
+  outline: 0;
 }
 
 .newfunctionalities label {

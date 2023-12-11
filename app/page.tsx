@@ -138,6 +138,7 @@ const Home: React.FC = () => {
   }
 
   return (
+    <>
     <CardContent>
       <div className="principalContent">
         <nav>
@@ -231,6 +232,7 @@ const Home: React.FC = () => {
         )}
       </div>
     </CardContent>
+    </>
   );
 };
 

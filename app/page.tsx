@@ -190,7 +190,7 @@ const Home: React.FC = () => {
                 <img src="/logo (1).png" alt="PH Negócios Plataforma" style={{ width: '100px', height: 'auto', marginTop: '5%', marginBottom: '3%' }} />
                 <div className='link'>
                   <li><a href="/">Bases</a></li>
-                  <li className="center"><a href="#">Graficos</a></li>
+                  <li className="center"><a href="https://growth-stage-phi.vercel.app/">Graficos</a></li>
                   <li className="upward"><a href="#">Adicionar</a></li>
                   <li className="forward"><a href="#">Update</a></li>
                 </div>

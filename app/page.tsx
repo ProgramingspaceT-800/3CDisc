@@ -125,15 +125,15 @@ const Home: React.FC = () => {
               allBaseData[baseId].push(...filteredData);
             }
 
-            const temPorcentagemMaiorQue90 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) >= 75);
-            const temPorcentagemMaiorIguala90 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) === 75);
+            const temPorcentagemMaiorQue75 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) >= 75);
+            const temPorcentagemMaiorIguala75 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) === 75);
 
-            if (temPorcentagemMaiorQue90 && !audioPlayedInThisUpdate && !alertedBases.includes(baseName)) {
+            if (temPorcentagemMaiorQue75 && !audioPlayedInThisUpdate && !alertedBases.includes(baseName)) {
               audioPlayedInThisUpdate = true;
             }
 
-            if (temPorcentagemMaiorIguala90 && !audioPlayedInThisUpdate && !alertedBases.includes(baseName)) {
-              alert(`A base ${baseName} atingiu 90%!`);
+            if (temPorcentagemMaiorIguala75 && !audioPlayedInThisUpdate && !alertedBases.includes(baseName)) {
+              alert(`A base ${baseName} atingiu 75%!`);
               // Adicione um alerta personalizado aqui
               setAlertedBases((prevAlertedBases) => [...prevAlertedBases, baseName]);
             }
@@ -162,7 +162,7 @@ const Home: React.FC = () => {
     if (porcentagemNum === 100) {
       const porcentagemFormatada = porcentagemNum.toFixed(0);
       return <span className="porcentagem-azul">{porcentagemFormatada}%</span>;
-    } else if (porcentagemNum >= 90 && porcentagemNum <= 100) {
+    } else if (porcentagemNum >= 75 && porcentagemNum <= 100) {
       const porcentagemFormatada = porcentagemNum.toFixed(0);
       return <span className="porcentagem-vermelha">{porcentagemFormatada}%</span>;
     } else {
@@ -247,7 +247,7 @@ const Home: React.FC = () => {
                       className={`campaign-card${expandedBase === bases[baseName] ? ' clicked' : ''}`}
                       onClick={() => toggleDetails(bases[baseName])}
                     >
-                      <div className={`base ${baseData[bases[baseName]] && baseData[bases[baseName]].length > 0 && parseFloat(baseData[bases[baseName]][0]?.completed_percentage) >= 90 ? 'com-aviso' : ''}`}>{baseName}</div>
+                      <div className={`base ${baseData[bases[baseName]] && baseData[bases[baseName]].length > 0 && parseFloat(baseData[bases[baseName]][0]?.completed_percentage) >= 75 ? 'com-aviso' : ''}`}>{baseName}</div>
 {/*                       <input type="file" onChange={(e) => handleFileUpload(e, bases[baseName])} />
  */}
                       {expandedBase === bases[baseName] && (
@@ -255,7 +255,7 @@ const Home: React.FC = () => {
                           {baseData[bases[baseName]]?.map((post) => (
                             <Container key={post.id}>
                               <div
-                                className={`percentage-item ${parseFloat(post.completed_percentage) >= 90 ? 'com-aviso' : ''}`}
+                                className={`percentage-item ${parseFloat(post.completed_percentage) >= 75 ? 'com-aviso' : ''}`}
                               >
                                 <h3>{post.name}</h3>
                                 <p>{post.created_at}</p>

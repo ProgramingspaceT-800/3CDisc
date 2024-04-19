@@ -125,8 +125,8 @@ const Home: React.FC = () => {
               allBaseData[baseId].push(...filteredData);
             }
 
-            const temPorcentagemMaiorQue90 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) >= 90);
-            const temPorcentagemMaiorIguala90 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) === 90);
+            const temPorcentagemMaiorQue90 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) >= 75);
+            const temPorcentagemMaiorIguala90 = filteredData.some((post: PostType) => parseFloat(post.completed_percentage) === 75);
 
             if (temPorcentagemMaiorQue90 && !audioPlayedInThisUpdate && !alertedBases.includes(baseName)) {
               audioPlayedInThisUpdate = true;
